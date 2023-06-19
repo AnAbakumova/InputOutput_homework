@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Main {
     private static int[] prices = {50, 100, 200};
     private static String[] products = {"Хлеб", "Молоко", "Яйца"};
-    private static File newFile = new File("basket.txt");
+    private static File newFile = new File("basket.bin");
 
     public static void main(String[] args) {
         Basket basket;
         if (newFile.exists()) {
-            basket = Basket.loadFromTxtFile(newFile);
+            basket = Basket.loadFromBinFile(newFile);
             basket.printCart();
         } else {
             basket = new Basket(prices, products);
@@ -37,11 +37,11 @@ public class Main {
                     basket.addToCart(Integer.parseInt(arrChoice[0]), Integer.parseInt(arrChoice[1]));
 
                     if (newFile.exists()) {
-                        basket.saveTxt(newFile);
+                        basket.saveBin(newFile);
                     } else {
                         try {
                             newFile.createNewFile();
-                            basket.saveTxt(newFile);
+                            basket.saveBin(newFile);
                         } catch (IOException ex) {
                             System.out.println(ex.getMessage());
                         }

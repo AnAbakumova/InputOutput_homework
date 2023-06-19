@@ -1,12 +1,13 @@
 import java.io.*;
 import java.util.Arrays;
 
-public class Basket {
+public class Basket implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     protected int[] prices;
     protected String[] products;
     protected int[] shoppingList;
     protected int sum;
-    protected File newFile = new File("basket.txt");
 
     public Basket() {
     }
@@ -16,7 +17,6 @@ public class Basket {
         this.prices = prices;
         this.products = products;
         shoppingList = new int[products.length];
-
     }
 
     //метод добавления amount штук продукта номер productNum в корзину;
@@ -80,6 +80,26 @@ public class Basket {
                 basket.shoppingList[i] = Integer.parseInt(shoppingListStr[i]);
             }
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return basket;
+    }
+
+    public void saveBin(File file){
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+            objectOutputStream.writeObject(this);
+        } catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static Basket loadFromBinFile(File file){
+        Basket basket = null;
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
+             basket = (Basket) objectInputStream.readObject();
+        } catch (Exception ex){
             System.out.println(ex.getMessage());
         }
         return basket;
