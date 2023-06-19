@@ -85,21 +85,21 @@ public class Basket implements Serializable {
         return basket;
     }
 
-    public void saveBin(File file){
+    public void saveBin(File file) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(file);
-             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(this);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public static Basket loadFromBinFile(File file){
+    public static Basket loadFromBinFile(File file) {
         Basket basket = null;
         try (FileInputStream fileInputStream = new FileInputStream(file);
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
-             basket = (Basket) objectInputStream.readObject();
-        } catch (Exception ex){
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            basket = (Basket) objectInputStream.readObject();
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return basket;
