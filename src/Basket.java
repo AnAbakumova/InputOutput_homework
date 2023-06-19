@@ -6,7 +6,6 @@ public class Basket {
     protected String[] products;
     protected int[] shoppingList;
     protected int sum;
-    protected File newFile = new File("basket.txt");
 
     public Basket() {
     }
@@ -16,7 +15,6 @@ public class Basket {
         this.prices = prices;
         this.products = products;
         shoppingList = new int[products.length];
-
     }
 
     //метод добавления amount штук продукта номер productNum в корзину;
